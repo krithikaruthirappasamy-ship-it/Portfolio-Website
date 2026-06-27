@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krithi | Portfolio</title>
+<style>
+/* --- Design Tokens & Variables --- */
+:root {
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --primary-glow: #818cf8;
+    --accent-radiant: linear-gradient(90deg, #a855f7, #6366f1, #06b6d4);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+}
+
+/* --- Global Resets --- */
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* --- Navigation Header --- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--card-border);
+}
+.head {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+@media (min-width: 768px) {
+    .head {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+.brand h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    background: var(--accent-radiant);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.brand h3 {
+    margin: 2px 0 0 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+nav {
+    display: flex;
+    gap: 15px;
+}
+nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+nav a:hover {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* --- Section Layouts --- */
+section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+section h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+}
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: var(--accent-radiant);
+    border-radius: 2px;
+}
+
+/* --- About Section --- */
+.container {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 40px;
+}
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+.box {
+    flex: 1;
+}
+.box h2 {
+    text-align: left;
+}
+.box h2::after {
+    left: 0;
+    transform: none;
+}
+.box p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+.about-image img {
+    border-radius: 50%;
+    border: 4px solid transparent;
+    background: linear-gradient(#1e1b4b, #1e1b4b) padding-box, var(--accent-radiant) border-box;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+}
+
+/* --- Buttons --- */
+button {
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: var(--accent-radiant);
+    color: white;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+}
+
+/* --- Skills Section --- */
+.skills {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.skills a {
+    text-decoration: none;
+}
+.skills span {
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: block;
+    background: var(--card-bg);
+    color: var(--text-main);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 1px solid var(--card-border);
+    transition: all 0.3s ease;
+}
+.skills span:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-glow);
+    transform: scale(1.05);
+}
+
+/* --- Projects Section (Grid UI Replacement) --- */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+.project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 25px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(6, 182, 212, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+}
+.project-card h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: var(--primary-glow);
+}
+.project-card ul {
+    padding-left: 20px;
+    margin: 0;
+    color: var(--text-muted);
+}
+.project-card li {
+    margin-bottom: 8px;
+}
+
+/* --- Achievements Section --- */
+.ach {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.ach p {
+    font-size: 1.05rem;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin: 0;
+}
+.ach p:last-child {
+    border-bottom: none;
+}
+.ach-highlight {
+    background: linear-gradient(90deg, #06b6d4, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+/* --- Footer & Contact --- */
+footer {
+    background: rgba(15, 23, 42, 0.9);
+    border-top: 1px solid var(--card-border);
+    padding: 50px 20px;
+    text-align: center;
+}
+.footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+footer p {
+    color: var(--text-muted);
+    margin: 8px 0;
+}
+.contact-info {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-main);
+    margin-bottom: 15px !important;
+}
+footer a {
+    color: var(--primary-glow);
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+footer a:hover {
+    text-decoration: underline;
+}
+.copyright {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.3) !important;
+    margin-top: 30px !important;
+}
+</style>
+</head>
+<body>
+
+<header id="home">
+    <div class="head">
+        <div class="brand">
+            <h2>@KRITHI.PORTFOLIO</h2>
+            <h3>FULLSTACK || CSBS</h3>
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<section id="about">
+    <div class="container">
+        <div class="box">
+            <h2>About Me</h2>
+            <p>I am a passionate and hardworking B.Tech Computer Science and Business Systems student with a strong interest in web development, software engineering, cloud computing, and emerging technologies.</p>
+            <a href="KRITHIKA R - RESUME .docx.pdf" download>
+                <button>Download Resume</button>
+            </a>
+        </div>
+        <div class="about-image">
+            <img src="me.jpeg" alt="Krithika" width="150" height="150">
+        </div>
+    </div>
+</section>
+
+<section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+        <a href="html coursera.pdf" target="_blank"><span>HTML</span></a>
+        <a href="html coursera.pdf" target="_blank"><span>CSS</span></a>
+        <a href="html coursera.pdf" target="_blank"><span>JAVASCRIPT</span></a>
+        <a href="python.png" target="_blank"><span>PYTHON</span></a>
+        <a href="Screenshot 2026-06-19 203749.png" target="_blank"><span>C++</span></a>
+        <a href="IBM  - cloud computing.pdf" target="_blank"><span>CLOUD COMPUTING</span></a>
+        <a href="IBM - coursera.pdf" target="_blank"><span>UML MODELING</span></a>
+        <a href="Wadhwani Foundation Certificate - 6908e73ad4ed7c22567385dd.pdf" target="_blank"><span>Life Skills</span></a>
+    </div>
+</section>
+
+<section id="projects">
+    <h2>Projects & Domains</h2>
+    <div class="project-grid">
+        <div class="project-card">
+            <h3>Full Stack - Frontend</h3>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Forms</li>
+                <li>Portfolio</li>
+            </ul>
+        </div>
+        <div class="project-card">
+            <h3>Full Stack - Backend</h3>
+            <ul>
+                <li>Python</li>
+                <li>C++</li>
+                <li>Java</li>
+                <li>Node.js</li>
+            </ul>
+        </div>
+        <div class="project-card">
+            <h3>Database</h3>
+            <ul>
+                <li>SQL Queries</li>
+            </ul>
+        </div>
+        <div class="project-card">
+            <h3>Certificates</h3>
+            <ul>
+                <li>HTML-5</li>
+                <li>CSS and JavaScript</li>
+                <li>Software Engineering</li>
+                <li>Cloud Computing</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="achive">
+    <h2>Achievements</h2>
+    <div class="ach">
+        <p class="ach-highlight">🏆 Completed IBM Certifications</p>
+        <p>🎓 Completed Coursera Web Development Course</p>
+        <p>💻 Built personal portfolio website</p>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content" id="contact">
+        <p class="contact-info">📞 Contact: +91 7708096617</p>
+        <p>📍 Address: Kovilpatti</p>
+        <p>✉️ <a href="mailto:krithikaruthirappasamy@gmail.com">krithikaruthirappasamy@gmail.com</a></p>
+        <p>
+            🔗 <a href="https://www.linkedin.com" target="_blank">Connect on LinkedIn</a>
+        </p>
+        <p>Thank you for visiting my portfolio!</p>
+        <p class="copyright">&copy; 2026 Krithi. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>
